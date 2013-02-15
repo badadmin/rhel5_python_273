@@ -30,11 +30,11 @@ pybuild_add() {
 	export C_INCLUDE_PATH="$PREFIX/include"
 	export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
 	export LIBRARY_PATH="$PREFIX/lib"
-    export LDFLAGS="-L$PREFIX/lib"
-    export CPPFLAGS="-I$PREFIX/include"
-    export CXXFLAGS=$CPPFLAGS
-    export CFLAGS=$CPPFLAGS
-    export LD_LIBRARY_PATH=$PREFIX/lib
+	export LDFLAGS="-L$PREFIX/lib"
+	export CPPFLAGS="-I$PREFIX/include"
+	export CXXFLAGS=$CPPFLAGS
+	export CFLAGS=$CPPFLAGS
+	export LD_LIBRARY_PATH=$PREFIX/lib
 	export LD_RUN_PATH=$LD_LIBRARY_PATH
 }
 
@@ -152,8 +152,8 @@ pybuild_tcl() {
 }
 
 pybuild_tk() {
-    dl_if_none tk8.6.0.tar.gz http://prdownloads.sourceforge.net/tcl/tk8.6.0-src.tar.gz
-    	tar -C $BUILDDIR -zxf $SRCDIR/tk*
+	dl_if_none tk8.6.0.tar.gz http://prdownloads.sourceforge.net/tcl/tk8.6.0-src.tar.gz
+	tar -C $BUILDDIR -zxf $SRCDIR/tk*
 	cd $BUILDDIR/tk8.6.0/unix
 	pybuild_add
 	./configure --prefix=$PREFIX --with-tcl=$PREFIX/lib --enable-64bit
@@ -187,23 +187,6 @@ pybuild_bsdbm() {
 	build_cleanup
 }
 
-pybuild_python_with_patch() {
-	dl_if_none Python-2.7.3.tar.bz2 http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2
-    dl_if_none Python-2.7.3-bsddb_fix-1.patch http://www.linuxfromscratch.org/patches/blfs/svn/Python-2.7.3-bsddb_fix-1.patch
-	tar -C $BUILDDIR -jxf $SRCDIR/Python*.bz2
-    cd $BUILDDIR/Python*
-    cp $SCRDIR/Python*.patch $BUILDDIR/.
-	pybuild_add
-	pybuild_add_prepython
-    sed -i "s/ndbm_libs = \[\]/ndbm_libs = ['gdbm', 'gdbm_compat']/" setup.py
-    patch -Np1 -i ../Python-2.7.3-bsddb_fix-1.patch
-	./configure --enable-shared --prefix=$PREFIX --enable-ipv6 --with-dbmlib order=gdbm:bdb --with-threads
-	make
-	make install
-	pybuild_remove
-	build_cleanup
-}
-
 pybuild_python() {
 	dl_if_none Python-2.7.3.tar.bz2 http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2
 	tar -C $BUILDDIR -jxf $SRCDIR/Python*
@@ -226,8 +209,8 @@ build_python273() {
 	pybuild_openssl
 	pybuild_ncurses
 	pybuild_readline
-    pybuild_tcl
-    pybuild_tk
+	pybuild_tcl
+	pybuild_tk
 	pybuild_gdbm
 	pybuild_bsdbm
 	pybuild_python
