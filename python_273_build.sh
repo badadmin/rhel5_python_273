@@ -140,7 +140,7 @@ pybuild_readline() {
 }
 
 pybuild_tcl() {
-    dl_if_none tcl8.6.0.tar.gz http://prdownloads.sourceforge.net/tcl/tcl8.6.0-src.tar.gz
+	dl_if_none tcl8.6.0.tar.gz http://prdownloads.sourceforge.net/tcl/tcl8.6.0-src.tar.gz
 	tar -C $BUILDDIR -zxf $SRCDIR/tcl*
 	cd $BUILDDIR/tcl8.6.0/unix
 	pybuild_add
